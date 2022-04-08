@@ -166,7 +166,7 @@ void write_user(){
 void borrow_book()
 {
     int id;
-    printf("Blew is the list of Books you can borrow:\n");
+    printf("Below is the list of Books you can borrow:\n");
     Display();
     printf("Enter the ID number of the book you wish to borrow: ");
     scanf("%d", &id);
@@ -194,21 +194,20 @@ void borrow_book()
 void return_book()
 {
     int id;
-    printf("Blew is the list of Books you are currently borrowing:\n");
+    printf("Below is the list of Books you are currently borrowing:\n");
     printf("ID\tTitle\tAuthor\tyear\tcopies\n");
-
     for (int i = 0; i <= users->top; i++)
     {
         if (strcmp(users->us[i].account, current_user) == 0)
         {
             for (int j = 0; j < users->us[i].borrow_number; j++)
             {
-                BookList *p = books->next;
+                Book *p = books->list;
                 while (p != NULL)
                 {
                     if (p->Book.id == users->us[i].borrow_book[j])
                     {
-                        printf("%d \t%s \t%s \t%d \t%d\n", p->Book.id, p->Book.title, p->Book.authors, p->Book.year, p->Book.copies);
+                        printf("%d \t%s \t%s \t%d \t%d\n", p->id, p->title, p->authors, p->year, p->copies);
                     }
                     p = p->next;
                 }
