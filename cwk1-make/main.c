@@ -6,6 +6,7 @@ int main()
     read_users();
     load_books();
     menu();
-    //write_file();
+    write_user();
+    store_books();
     return 0;
 }
