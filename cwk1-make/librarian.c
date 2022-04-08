@@ -25,6 +25,7 @@ void librarian_menu()
             add_book();
             break;
         case 2:
+            Display();
             remove_book();
             break;
         case 3:
