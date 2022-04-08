@@ -10,20 +10,19 @@
 
 
 typedef struct _Book {
-	    int id; //Book ID
+	    unsigned int id; //Book ID
 		char *title; //book title
 		char *authors; //comma separated list of authors
-		int year; // year of publication
-		int copies; //number of copies the library has
+		unsigned int year; // year of publication
+		unsigned int copies; //number of copies the library has
+		struct _Book *next; //pointer to the next book element
 }Book;
 
 typedef struct _BookList {
+	 Book* list; // pointer to a list of struct Book.
 	 unsigned int length; // number of elements in the (Book*) List
-	 struct _Book Book;
-	 struct _BookList *next; //pointer to the next book element
 }BookList;
 
-Book *init_book_list();
 
 //saves the database of books in the specified file
 //returns 0 if books were stored correctly, or an error code otherwise
@@ -36,11 +35,32 @@ int load_books(FILE *file);
 
 //adds a book to the ones available to the library
 //returns 0 if the book could be added, or an error code otherwise
-int add_book();
+int add_book(Book book);
 
 //removes a book from the library
 //returns 0 if the book could be successfully removed, or an error code otherwise.
-int remove_book();
+int remove_book(Book book);
+
+//finds books with a given title.
+//returns a BookList structure, where the field "list" is a list of books, or null if no book with the
+//provided title can be found. The length of the list is also recorded in the returned structure, with 0 in case
+//list is the NULL pointer.
+BookList find_book_by_title ();
+
+//finds books with the given authors.
+//returns a Booklist structure, where the field "list" is a newly allocated list of books, or null if no book with the
+//provided title can be found. The length of the list is also recorded in the returned structure, with 0 in case
+//list is the NULL pointer.
+BookList find_book_by_author ();
+
+//finds books published in the given year.
+//returns a Booklist structure, where the field "list" is a list of books, or null if no book with the
+//provided title can be found. The length of the list is also recorded in the returned structure, with 0 in case
+//list is the NULL pointer.
+BookList find_book_by_year ();
+
+BookList *init_book_list();
+
 
 void Search();
 void Display();
